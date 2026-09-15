@@ -46,3 +46,5 @@ frontend/.next/
 # --- Local tooling config ---
 .claude/settings.local.json
 .vercel/
+.vercel
+.env*

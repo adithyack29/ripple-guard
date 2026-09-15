@@ -169,10 +169,15 @@ class RedisAnalysisStore:
 
 def _build_analysis_store():
     settings = get_settings()
-    if settings.upstash_redis_rest_url and settings.upstash_redis_rest_token:
+    # Prefer the newer UPSTASH_REDIS_REST_* naming; fall back to the older
+    # KV_REST_API_* naming some Upstash-for-Redis resources still inject
+    # (see app.core.config.Settings for why both exist).
+    url = settings.upstash_redis_rest_url or settings.kv_rest_api_url
+    token = settings.upstash_redis_rest_token or settings.kv_rest_api_token
+    if url and token:
         return RedisAnalysisStore(
-            url=settings.upstash_redis_rest_url,
-            token=settings.upstash_redis_rest_token,
+            url=url,
+            token=token,
             max_size=settings.analysis_store_max_size,
             ttl_seconds=settings.analysis_store_ttl_seconds,
         )

@@ -33,14 +33,25 @@ class Settings(BaseSettings):
     analysis_store_max_size: int = 100
     analysis_store_ttl_seconds: int = 3600
 
-    # Optional: Upstash Redis REST credentials (Vercel Marketplace "Upstash"
-    # integration injects these automatically once connected to the
-    # project). When both are set, app.services.analysis_store uses a
+    # Optional: Upstash Redis REST credentials (Vercel Marketplace "Upstash
+    # for Redis" integration injects these automatically once connected to
+    # the project). When present, app.services.analysis_store uses a
     # Redis-backed store instead of the in-process dict, since a stateless
     # serverless deployment has no single long-lived process to hold it in
     # memory. Left unset, local development is unchanged.
+    #
+    # Two naming schemes exist for the exact same REST credentials,
+    # depending on when/how the resource was provisioned: newer
+    # connections inject UPSTASH_REDIS_REST_URL/TOKEN; resources connected
+    # under Vercel's older KV-branded integration path inject
+    # KV_REST_API_URL/TOKEN instead (see app.services.analysis_store's
+    # _build_analysis_store, which prefers the former, falls back to the
+    # latter). Both are genuine Upstash for Redis credentials — this is
+    # not the deprecated @vercel/kv product, just an older env var prefix.
     upstash_redis_rest_url: Optional[str] = None
     upstash_redis_rest_token: Optional[str] = None
+    kv_rest_api_url: Optional[str] = None
+    kv_rest_api_token: Optional[str] = None
 
     # Consumed by app.simulation.propagation (Phase 3) — bounds on
     # propagation-path enumeration to avoid combinatorial blowup on
