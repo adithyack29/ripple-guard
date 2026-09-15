@@ -1,0 +1,25 @@
+{
+  "vulns": [
+    {
+      "id": "GHSA-p6mc-m468-83gw",
+      "summary": "Prototype Pollution in lodash",
+      "details": "Versions of lodash prior to 4.17.19 are vulnerable to Prototype Pollution via the zipObjectDeep function.",
+      "aliases": ["CVE-2020-8203"],
+      "published": "2020-07-15T17:54:00Z",
+      "modified": "2023-11-08T04:12:30Z",
+      "database_specific": {
+        "severity": "HIGH"
+      },
+      "references": [
+        {"type": "ADVISORY", "url": "https://github.com/advisories/GHSA-p6mc-m468-83gw"},
+        {"type": "WEB", "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-8203"}
+      ],
+      "affected": [
+        {
+          "package": {"name": "lodash", "ecosystem": "npm"},
+          "ranges": [{"type": "SEMVER", "events": [{"introduced": "0"}, {"fixed": "4.17.19"}]}]
+        }
+      ]
+    }
+  ]
+}

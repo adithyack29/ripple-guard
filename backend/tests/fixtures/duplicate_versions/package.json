@@ -1,0 +1,8 @@
+{
+  "name": "dup-version-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "package-a": "^1.0.0",
+    "package-b": "^1.0.0"
+  }
+}

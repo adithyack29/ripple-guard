@@ -1,0 +1,12 @@
+{
+  "vulns": [
+    {
+      "id": "GHSA-0000-0000-0000",
+      "summary": "Unspecified issue in example-pkg",
+      "aliases": [],
+      "published": "2022-01-01T00:00:00Z",
+      "modified": "2022-01-02T00:00:00Z",
+      "references": []
+    }
+  ]
+}
