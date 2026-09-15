@@ -1,6 +1,7 @@
 """Application settings, loaded from environment variables / .env."""
 
 from functools import lru_cache
+from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -31,6 +32,15 @@ class Settings(BaseSettings):
     # in-process only — see docs/ARCHITECTURE.md.
     analysis_store_max_size: int = 100
     analysis_store_ttl_seconds: int = 3600
+
+    # Optional: Upstash Redis REST credentials (Vercel Marketplace "Upstash"
+    # integration injects these automatically once connected to the
+    # project). When both are set, app.services.analysis_store uses a
+    # Redis-backed store instead of the in-process dict, since a stateless
+    # serverless deployment has no single long-lived process to hold it in
+    # memory. Left unset, local development is unchanged.
+    upstash_redis_rest_url: Optional[str] = None
+    upstash_redis_rest_token: Optional[str] = None
 
     # Consumed by app.simulation.propagation (Phase 3) — bounds on
     # propagation-path enumeration to avoid combinatorial blowup on
